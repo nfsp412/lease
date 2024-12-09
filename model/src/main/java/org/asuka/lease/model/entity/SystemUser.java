@@ -7,12 +7,15 @@ import lombok.Data;
 import org.asuka.lease.model.enums.BaseStatus;
 import org.asuka.lease.model.enums.SystemUserType;
 
+import java.io.Serial;
+
 @Schema(description = "员工信息")
 @TableName(value = "system_user")
 @Data
 public class SystemUser extends BaseEntity {
 
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "用户名")

@@ -6,10 +6,13 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.asuka.lease.model.enums.ItemType;
 
+import java.io.Serial;
+
 @Schema(description = "配套信息表")
 @TableName(value = "facility_info")
 @Data
 public class FacilityInfo extends BaseEntity {
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "配套所属对象类型")

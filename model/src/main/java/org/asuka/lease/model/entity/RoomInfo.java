@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.asuka.lease.model.enums.ReleaseStatus;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 
 @Schema(description = "房间信息表")
@@ -13,6 +14,7 @@ import java.math.BigDecimal;
 @Data
 public class RoomInfo extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "房间号")

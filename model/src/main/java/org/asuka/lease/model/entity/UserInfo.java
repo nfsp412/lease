@@ -7,11 +7,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.asuka.lease.model.enums.BaseStatus;
 
+import java.io.Serial;
+
 @Schema(description = "用户信息表")
 @TableName(value = "user_info")
 @Data
 public class UserInfo extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "手机号码（用做登录用户名）")

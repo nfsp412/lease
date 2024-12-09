@@ -8,6 +8,7 @@ import lombok.Data;
 import org.asuka.lease.model.enums.LeaseSourceType;
 import org.asuka.lease.model.enums.LeaseStatus;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -16,6 +17,7 @@ import java.util.Date;
 @Data
 public class LeaseAgreement extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "承租人手机号码")

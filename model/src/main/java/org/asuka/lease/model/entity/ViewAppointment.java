@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import org.asuka.lease.model.enums.AppointmentStatus;
 
+import java.io.Serial;
 import java.util.Date;
 
 @Schema(description = "预约看房信息表")
@@ -13,6 +14,7 @@ import java.util.Date;
 @Data
 public class ViewAppointment extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "用户id")

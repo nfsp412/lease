@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serial;
+
 
 @TableName(value = "room_lease_term")
 @Data
@@ -17,6 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RoomLeaseTerm extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "房间id")

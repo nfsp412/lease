@@ -6,12 +6,15 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Builder;
 import lombok.Data;
 
+import java.io.Serial;
+
 @Schema(description = "公寓标签关联表")
 @TableName(value = "apartment_label")
 @Data
 @Builder
 public class ApartmentLabel extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "公寓id")

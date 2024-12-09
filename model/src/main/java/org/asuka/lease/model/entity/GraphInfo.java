@@ -6,11 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 import org.asuka.lease.model.enums.ItemType;
 
+import java.io.Serial;
+
 @Schema(description = "图片信息表")
 @TableName(value = "graph_info")
 @Data
 public class GraphInfo extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "图片名称")

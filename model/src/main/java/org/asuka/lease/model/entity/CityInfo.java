@@ -5,11 +5,14 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serial;
+
 @Schema(description = "城市信息表")
 @TableName(value = "city_info")
 @Data
 public class CityInfo extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "城市名称")

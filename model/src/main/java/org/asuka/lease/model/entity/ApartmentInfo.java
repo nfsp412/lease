@@ -6,11 +6,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.asuka.lease.model.enums.ReleaseStatus;
 
+import java.io.Serial;
+
 @Schema(description = "公寓信息表")
 @TableName(value = "apartment_info")
 @Data
 public class ApartmentInfo extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "公寓名称")

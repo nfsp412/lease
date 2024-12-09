@@ -5,11 +5,14 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serial;
+
 @Schema(description = "杂项费用值表")
 @TableName(value = "fee_value")
 @Data
 public class FeeValue extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "费用value")

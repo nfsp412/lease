@@ -5,12 +5,15 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.io.Serial;
+
 
 @TableName(value = "lease_term")
 @Data
 @Schema(description = "租期信息")
 public class LeaseTerm extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "租期月数")

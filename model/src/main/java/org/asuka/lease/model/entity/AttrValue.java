@@ -5,11 +5,14 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serial;
+
 @Schema(description = "房间基本属性值表")
 @TableName(value = "attr_value")
 @Data
 public class AttrValue extends BaseEntity {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(description = "属性value")
