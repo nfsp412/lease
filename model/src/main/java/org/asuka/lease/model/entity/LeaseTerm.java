@@ -5,9 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
-/**
- * @TableName lease_term
- */
+
 @TableName(value = "lease_term")
 @Data
 @Schema(description = "租期信息")

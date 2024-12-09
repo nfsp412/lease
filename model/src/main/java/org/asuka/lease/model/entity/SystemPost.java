@@ -6,11 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import org.asuka.lease.model.enums.BaseStatus;
 
-/**
- * 岗位信息表
- *
- * @TableName system_post
- */
+@Schema(description = "岗位信息表")
 @TableName(value = "system_post")
 @Data
 public class SystemPost extends BaseEntity {

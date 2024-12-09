@@ -7,8 +7,6 @@ import lombok.Data;
 import org.asuka.lease.model.enums.ReleaseStatus;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
 
 @Schema(description = "房间信息表")
 @TableName(value = "room_info")

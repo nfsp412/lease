@@ -10,9 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-/**
- * @TableName browsing_history
- */
+
 @TableName(value = "browsing_history")
 @Data
 @AllArgsConstructor

@@ -8,9 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * @TableName room_lease_term
- */
+
 @TableName(value = "room_lease_term")
 @Data
 @Schema(description = "房间租期关系表")
