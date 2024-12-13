@@ -1,6 +1,5 @@
 package org.asuka.lease.common.result;
 
-import lombok.Builder;
 import lombok.Data;
 
 /**

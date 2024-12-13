@@ -1,8 +1,6 @@
 package org.asuka.lease.web.admin.controller.apartment;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.asuka.lease.common.result.Result;
 import org.asuka.lease.model.entity.PaymentType;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,7 +9,6 @@ import org.asuka.lease.web.admin.service.PaymentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 

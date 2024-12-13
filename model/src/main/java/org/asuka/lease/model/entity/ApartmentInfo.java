@@ -5,9 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.NonNull;
 import org.asuka.lease.model.enums.ReleaseStatus;
-import org.springframework.validation.annotation.Validated;
 
 import java.io.Serial;
 

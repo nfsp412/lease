@@ -16,5 +16,5 @@ public interface AttrKeyService extends IService<AttrKey> {
 
     List<AttrKeyVo> getAttrKeyVoList();
 
-    boolean deleteAttrKeyAndValue(Long attrKeyId);
+    void deleteAttrKeyAndValue(Long attrKeyId);
 }

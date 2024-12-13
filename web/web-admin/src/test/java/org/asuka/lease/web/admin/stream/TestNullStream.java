@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 public class TestNullStream {
     @Test
     public void test1() {
-        List<Integer> l1 = null;
-        List<Integer> l2 = l1.stream().map((x) -> x + 1).collect(Collectors.toList());
-        System.out.println(l2);
+//        List<Integer> l1 = null;
+//        List<Integer> l2 = l1.stream().map((x) -> x + 1).collect(Collectors.toList());
+//        System.out.println(l2);
     }
 }

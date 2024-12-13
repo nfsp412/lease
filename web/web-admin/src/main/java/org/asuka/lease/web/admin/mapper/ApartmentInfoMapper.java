@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.asuka.lease.model.entity.ApartmentInfo;
 import org.asuka.lease.web.admin.vo.apartment.ApartmentItemVo;
 import org.asuka.lease.web.admin.vo.apartment.ApartmentQueryVo;
-import org.asuka.lease.web.admin.vo.apartment.ApartmentSubmitVo;
 
 /**
 * @author liubo

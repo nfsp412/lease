@@ -1,7 +1,6 @@
 package org.asuka.lease.web.admin.controller.apartment;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.asuka.lease.common.result.Result;
 import org.asuka.lease.model.entity.AttrKey;
 import org.asuka.lease.model.entity.AttrValue;
@@ -11,8 +10,6 @@ import org.asuka.lease.web.admin.vo.attr.AttrKeyVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

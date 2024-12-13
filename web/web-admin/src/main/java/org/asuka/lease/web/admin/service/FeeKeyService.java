@@ -16,5 +16,5 @@ public interface FeeKeyService extends IService<FeeKey> {
 
     List<FeeKeyVo> getFeeKeyVoList();
 
-    boolean deleteFeeKeyAndValue(Long feeKeyId);
+    void deleteFeeKeyAndValue(Long feeKeyId);
 }

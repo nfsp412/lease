@@ -3,7 +3,6 @@ package org.asuka.lease.web.admin.service.impl;
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;
 import org.asuka.lease.common.constant.RedisConstant;
-import org.asuka.lease.common.utils.JwtUtil;
 import org.asuka.lease.model.entity.SystemUser;
 import org.asuka.lease.web.admin.mapper.LoginMapper;
 import org.asuka.lease.web.admin.service.LoginService;
@@ -32,7 +31,7 @@ public class LoginServiceImpl implements LoginService {
      * 2.将图片验证码的图片image和redis的key返回
      * 到这里接口功能结束
      *
-     * @return
+     * @return CaptchaVo
      */
     @Override
     public CaptchaVo getCaptchaVo() {

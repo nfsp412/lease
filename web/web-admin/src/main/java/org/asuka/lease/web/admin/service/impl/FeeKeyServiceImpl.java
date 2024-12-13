@@ -1,6 +1,7 @@
 package org.asuka.lease.web.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import jakarta.annotation.Resource;
 import org.asuka.lease.model.entity.FeeKey;
 import org.asuka.lease.model.entity.FeeValue;
 import org.asuka.lease.web.admin.mapper.FeeKeyMapper;
@@ -22,7 +23,7 @@ import java.util.List;
 @Service
 public class FeeKeyServiceImpl extends ServiceImpl<FeeKeyMapper, FeeKey>
         implements FeeKeyService {
-    @Autowired
+    @Resource
     private FeeKeyMapper feeKeyMapper;
 
     @Autowired
@@ -35,16 +36,12 @@ public class FeeKeyServiceImpl extends ServiceImpl<FeeKeyMapper, FeeKey>
 
     @Transactional
     @Override
-    public boolean deleteFeeKeyAndValue(Long feeKeyId) {
-        boolean flag1 = this.removeById(feeKeyId);
+    public void deleteFeeKeyAndValue(Long feeKeyId) {
+        super.removeById(feeKeyId);
         LambdaQueryWrapper<FeeValue> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(FeeValue::getFeeKeyId, feeKeyId);
-        boolean flag2 = feeValueService.remove(wrapper);
-        if (flag1 && flag2){
-            return true;
-        }else {
-            return false;
-        }
+        feeValueService.remove(wrapper);
+
     }
 }
 

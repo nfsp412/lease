@@ -17,18 +17,15 @@ import org.springframework.stereotype.Component;
 public class StringToBaseEnumConverterFactory implements ConverterFactory<String, BaseEnum> {
     @Override
     public <T extends BaseEnum> Converter<String, T> getConverter(Class<T> targetType) {
-        return new Converter<String, T>() {
-            @Override
-            public T convert(String source) {
-                //获取枚举类型的全部实例对象
-                T[] ts = targetType.getEnumConstants();
-                for (T t : ts) {
-                    if (t.getCode().equals(Integer.valueOf(source))) {
-                        return t;
-                    }
+        return source -> {
+            //获取枚举类型的全部实例对象
+            T[] ts = targetType.getEnumConstants();
+            for (T t : ts) {
+                if (t.getCode().equals(Integer.valueOf(source))) {
+                    return t;
                 }
-                throw new IllegalArgumentException("code:" + source + "非法");
             }
+            throw new IllegalArgumentException("code:" + source + "非法");
         };
     }
 }

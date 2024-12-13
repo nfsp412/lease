@@ -19,7 +19,7 @@ public class MybatisPlusConfiguration {
     /**
      * 分页插件配置
      *
-     * @return
+     * @return MybatisPlusInterceptor
      */
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {

@@ -4,11 +4,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.asuka.lease.model.entity.AttrValue;
 import org.asuka.lease.web.admin.mapper.AttrValueMapper;
 import org.asuka.lease.web.admin.service.AttrValueService;
-import org.asuka.lease.web.admin.vo.attr.AttrKeyVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 /**
 * @author liubo

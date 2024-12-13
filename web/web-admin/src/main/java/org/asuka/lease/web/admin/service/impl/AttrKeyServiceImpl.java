@@ -2,10 +2,10 @@ package org.asuka.lease.web.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import jakarta.annotation.Resource;
 import org.asuka.lease.model.entity.AttrKey;
 import org.asuka.lease.model.entity.AttrValue;
 import org.asuka.lease.web.admin.mapper.AttrKeyMapper;
-import org.asuka.lease.web.admin.mapper.LoginMapper;
 import org.asuka.lease.web.admin.service.AttrKeyService;
 import org.asuka.lease.web.admin.service.AttrValueService;
 import org.asuka.lease.web.admin.vo.attr.AttrKeyVo;
@@ -27,22 +27,17 @@ public class AttrKeyServiceImpl extends ServiceImpl<AttrKeyMapper, AttrKey>
 
     @Transactional()
     @Override
-    public boolean deleteAttrKeyAndValue(Long attrKeyId) {
+    public void deleteAttrKeyAndValue(Long attrKeyId) {
         //删除key
-        boolean flag1 = this.removeById(attrKeyId);
+        this.removeById(attrKeyId);
 //        System.out.println(1 / 0); //测试事务
         //删除value
         LambdaQueryWrapper<AttrValue> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(AttrValue::getAttrKeyId, attrKeyId);
-        boolean flag2 = attrValueService.remove(wrapper);
-        if (flag1 && flag2) {
-            return true;
-        } else {
-            return false;
-        }
+        attrValueService.remove(wrapper);
     }
 
-    @Autowired
+    @Resource
     private AttrKeyMapper attrKeyMapper;
 
     @Override

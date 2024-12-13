@@ -22,9 +22,8 @@ public class LabelController {
 
     /**
      * Failed to convert value of type 'java.lang.String' to required type 'org.asuka.lease.model.enums.ItemType';
+     * <p>
      *
-     * @param type
-     * @return
      */
     @Operation(summary = "（根据类型）查询标签列表")
     @GetMapping("list")

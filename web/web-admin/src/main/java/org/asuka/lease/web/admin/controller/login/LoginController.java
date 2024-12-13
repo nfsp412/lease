@@ -22,7 +22,7 @@ public class LoginController {
 
     @Operation(summary = "获取图形验证码")
     @GetMapping("login/captcha")
-    public Result<CaptchaVo> getCaptcha(HttpServletResponse response) {
+    public Result<CaptchaVo> getCaptcha() {
         //获取图形验证码 CaptchaVo
         CaptchaVo captchaVo = loginService.getCaptchaVo();
 //        response.setHeader("Access-Control-Allow-Origin", "*");
