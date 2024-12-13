@@ -1,7 +1,6 @@
 package org.asuka.lease.web.admin.custom.config;
 
 import org.asuka.lease.web.admin.custom.converter.StringToBaseEnumConverterFactory;
-import org.asuka.lease.web.admin.custom.converter.StringToItemTypeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;

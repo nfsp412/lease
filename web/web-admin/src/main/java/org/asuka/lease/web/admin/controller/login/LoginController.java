@@ -1,7 +1,6 @@
 package org.asuka.lease.web.admin.controller.login;
 
 
-import jakarta.servlet.http.HttpServletResponse;
 import org.asuka.lease.common.result.Result;
 import org.asuka.lease.web.admin.service.LoginService;
 import org.asuka.lease.web.admin.vo.login.CaptchaVo;
