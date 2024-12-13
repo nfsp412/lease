@@ -4,4 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.asuka.lease.web.admin.mapper.FeeValueMapper">
 
+    <!--    List<FeeValueVo> getFeeValueVoList(Long id);-->
+    <select id="getFeeValueVoList" resultType="org.asuka.lease.web.admin.vo.fee.FeeValueVo">
+        select t1.id, t1.name, t1.unit, t1.fee_key_id, t2.name as fee_key_name
+        from lease.fee_value t1
+                 join lease.fee_key t2
+                      on t1.fee_key_id = t2.id
+        where t1.is_deleted = 0
+          and t2.is_deleted = 0
+          and t1.id in (select fee_value_id
+                        from lease.apartment_fee_value
+                        where is_deleted = 0
+                          and apartment_id = #{id})
+    </select>
 </mapper>

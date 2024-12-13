@@ -3,8 +3,11 @@ package org.asuka.lease.model.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.NonNull;
 import org.asuka.lease.model.enums.ReleaseStatus;
+import org.springframework.validation.annotation.Validated;
 
 import java.io.Serial;
 
@@ -42,6 +45,7 @@ public class ApartmentInfo extends BaseEntity {
 
     @Schema(description = "所处省份id")
     @TableField(value = "province_id")
+    @NotNull(message = "省份ID不能为空")
     private Long provinceId;
 
     @Schema(description = "所处区域名称")

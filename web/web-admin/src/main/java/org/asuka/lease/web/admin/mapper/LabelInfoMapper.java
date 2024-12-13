@@ -3,6 +3,8 @@ package org.asuka.lease.web.admin.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.asuka.lease.model.entity.LabelInfo;
 
+import java.util.List;
+
 
 /**
 * @author liubo
@@ -12,6 +14,7 @@ import org.asuka.lease.model.entity.LabelInfo;
 */
 public interface LabelInfoMapper extends BaseMapper<LabelInfo> {
 
+    List<LabelInfo> getLabelInfoList(Long id);
 }
 
 

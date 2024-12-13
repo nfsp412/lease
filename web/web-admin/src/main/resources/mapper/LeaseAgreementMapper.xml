@@ -4,4 +4,115 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.asuka.lease.web.admin.mapper.LeaseAgreementMapper">
 
+<!--    IPage<AgreementVo> getAgreementVoPage(Page<AgreementVo> page, AgreementQueryVo queryVo);-->
+    <resultMap id="AgreementVoMap" type="org.asuka.lease.web.admin.vo.agreement.AgreementVo" autoMapping="true">
+        <association property="apartmentInfo" javaType="org.asuka.lease.model.entity.ApartmentInfo" autoMapping="true">
+            <id property="id" column="apart_id"/>
+            <result property="name" column="apart_name"/>
+            <result property="phone" column="apart_phone"/>
+        </association>
+        <association property="roomInfo" javaType="org.asuka.lease.model.entity.RoomInfo" autoMapping="true">
+            <id property="id" column="rm_id"/>
+            <result property="apartmentId" column="rm_apart_id"/>
+            <result property="isRelease" column="rm_is_release"/>
+        </association>
+        <association property="paymentType" javaType="org.asuka.lease.model.entity.PaymentType" autoMapping="true">
+            <id property="id" column="pay_id"/>
+            <result property="name" column="pay_name"/>
+            <result property="additionalInfo" column="pay_addi_info"/>
+        </association>
+        <association property="leaseTerm" javaType="org.asuka.lease.model.entity.LeaseTerm" autoMapping="true">
+            <id property="id" column="lease_id"/>
+        </association>
+    </resultMap>
+    <sql id="getAgreementVoColumns">
+        select t1.id,
+               t1.phone,
+               t1.name,
+               t1.identification_number,
+               t1.apartment_id,
+               t1.room_id,
+               t1.lease_start_date,
+               t1.lease_end_date,
+               t1.lease_term_id,
+               t1.rent,
+               t1.deposit,
+               t1.payment_type_id,
+               t1.status,
+               t1.source_type,
+               t1.additional_info,
+               t2.id              as apart_id,
+               t2.name            as apart_name,
+               t2.introduction,
+               t2.district_id,
+               t2.district_name,
+               t2.city_id,
+               t2.city_name,
+               t2.province_id,
+               t2.province_name,
+               t2.address_detail,
+               t2.latitude,
+               t2.longitude,
+               t2.phone           as apart_phone,
+               t2.is_release,
+               t3.id              as rm_id,
+               t3.room_number,
+               t3.rent,
+               t3.apartment_id    as rm_apart_id,
+               t3.is_release      as rm_is_release,
+               t4.id              as pay_id,
+               t4.name            as pay_name,
+               t4.pay_month_count,
+               t4.additional_info as pay_addi_info,
+               t5.id              as lease_id,
+               t5.month_count,
+               t5.unit
+        from lease.lease_agreement t1
+                 left join lease.apartment_info t2
+                           on t1.apartment_id = t2.id
+                               and t2.is_deleted = 0
+                 left join lease.room_info t3
+                           on t1.room_id = t3.id
+                               and t3.is_deleted = 0
+                 left join lease.payment_type t4
+                           on t1.payment_type_id = t4.id
+                               and t4.is_deleted = 0
+                 left join lease.lease_term t5
+                           on t1.lease_term_id = t5.id
+                               and t5.is_deleted = 0
+    </sql>
+    <select id="getAgreementVoPage" resultMap="AgreementVoMap">
+        <include refid="getAgreementVoColumns"/>
+        <where>
+            t1.is_deleted = 0
+            <if test="queryVo.name != null and queryVo.name != ''">
+                and t1.name like concat('%', #{queryVo.name}, '%')
+            </if>
+            <if test="queryVo.phone != null and queryVo.phone != ''">
+                and t1.phone like concat('%', #{queryVo.phone}, '%')
+            </if>
+            <if test="queryVo.roomNumber != null and queryVo.roomNumber != ''">
+                and t3.room_number = #{queryVo.roomNumber}
+            </if>
+            <if test="queryVo.provinceId != null and queryVo.provinceId != ''">
+                and t2.province_id = #{queryVo.provinceId}
+            </if>
+            <if test="queryVo.cityId != null and queryVo.cityId != ''">
+                and t2.city_id = #{queryVo.cityId}
+            </if>
+            <if test="queryVo.districtId != null and queryVo.districtId != ''">
+                and t2.district_id = #{queryVo.districtId}
+            </if>
+            <if test="queryVo.apartmentId != null and queryVo.apartmentId != ''">
+                and t1.apartment_id = #{queryVo.apartmentId}
+            </if>
+        </where>
+    </select>
+
+<!--    AgreementVo getAgreementVoById(Long id);-->
+    <select id="getAgreementVoById" resultMap="AgreementVoMap">
+        <include refid="getAgreementVoColumns"/>
+        where t1.is_deleted = 0
+            and t1.id = #{id}
+    </select>
 </mapper>

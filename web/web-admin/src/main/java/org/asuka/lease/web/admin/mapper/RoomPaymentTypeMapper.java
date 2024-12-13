@@ -1,7 +1,10 @@
 package org.asuka.lease.web.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.asuka.lease.model.entity.PaymentType;
 import org.asuka.lease.model.entity.RoomPaymentType;
+
+import java.util.List;
 
 /**
 * @author liubo
@@ -11,6 +14,7 @@ import org.asuka.lease.model.entity.RoomPaymentType;
 */
 public interface RoomPaymentTypeMapper extends BaseMapper<RoomPaymentType> {
 
+    List<PaymentType> getPaymentTypeList(Long id);
 }
 
 

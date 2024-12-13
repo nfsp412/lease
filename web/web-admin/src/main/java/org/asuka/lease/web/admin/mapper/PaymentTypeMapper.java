@@ -3,6 +3,8 @@ package org.asuka.lease.web.admin.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.asuka.lease.model.entity.PaymentType;
 
+import java.util.List;
+
 
 /**
  * @author liubo
@@ -11,7 +13,6 @@ import org.asuka.lease.model.entity.PaymentType;
  *  com.atguigu.lease.model.PaymentType
  */
 public interface PaymentTypeMapper extends BaseMapper<PaymentType> {
-
 }
 
 

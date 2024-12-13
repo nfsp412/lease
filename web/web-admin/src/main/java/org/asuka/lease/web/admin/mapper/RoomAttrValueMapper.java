@@ -2,6 +2,9 @@ package org.asuka.lease.web.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.asuka.lease.model.entity.RoomAttrValue;
+import org.asuka.lease.web.admin.vo.attr.AttrValueVo;
+
+import java.util.List;
 
 /**
 * @author liubo
@@ -11,6 +14,7 @@ import org.asuka.lease.model.entity.RoomAttrValue;
 */
 public interface RoomAttrValueMapper extends BaseMapper<RoomAttrValue> {
 
+    List<AttrValueVo> getAttrValueVoList(Long id);
 }
 
 

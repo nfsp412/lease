@@ -29,6 +29,10 @@ public enum ResultCodeEnum {
     ADMIN_ACCOUNT_DISABLED_ERROR(308, "该用户已被禁用"),
     ADMIN_ACCESS_FORBIDDEN(309, "无访问权限"),
 
+    ADMIN_APARTMENT_DELETE_ERROR(310, "请先删除房间"),
+    ADMIN_ROOM_DELETE_ERROR(311, "该房间已出租"),
+    ADMIN_SYS_USER_DELETE_ERROR(312, "可用状态下不可删除,请先更改状态为不可用"),
+
     APP_LOGIN_AUTH(501, "未登陆"),
     APP_LOGIN_PHONE_EMPTY(502, "手机号码为空"),
     APP_LOGIN_CODE_EMPTY(503, "验证码为空"),

@@ -1,7 +1,10 @@
 package org.asuka.lease.web.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.asuka.lease.model.entity.FacilityInfo;
 import org.asuka.lease.model.entity.RoomFacility;
+
+import java.util.List;
 
 /**
 * @author liubo
@@ -11,6 +14,7 @@ import org.asuka.lease.model.entity.RoomFacility;
 */
 public interface RoomFacilityMapper extends BaseMapper<RoomFacility> {
 
+    List<FacilityInfo> getFacilityInfoList(Long id);
 }
 
 

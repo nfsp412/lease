@@ -4,4 +4,58 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.asuka.lease.web.admin.mapper.RoomInfoMapper">
 
+    <resultMap id="RoomItemVoMap" type="org.asuka.lease.web.admin.vo.room.RoomItemVo" autoMapping="true">
+        <id property="id" column="id"/>
+        <association property="apartmentInfo" javaType="org.asuka.lease.model.entity.ApartmentInfo" autoMapping="true">
+            <id property="id" column="apartment_id"/>
+            <result property="isRelease" column="apartment_is_release"/>
+        </association>
+    </resultMap>
+<!--    IPage<RoomItemVo> getRoomItemVoList(Page<RoomItemVo> page, RoomQueryVo queryVo);-->
+    <select id="getRoomItemVoList" resultMap="RoomItemVoMap">
+        select t1.id,
+               t1.room_number,
+               t1.rent,
+               t1.apartment_id,
+               t1.is_release,
+               t2.lease_end_date,
+               t2.room_id is not null as is_check_in,
+               t3.id                  as apartment_id,
+               t3.name,
+               t3.introduction,
+               t3.district_id,
+               t3.district_name,
+               t3.city_id,
+               t3.city_name,
+               t3.province_id,
+               t3.province_name,
+               t3.address_detail,
+               t3.latitude,
+               t3.longitude,
+               t3.phone,
+               t3.is_release          as apartment_is_release
+        from lease.room_info t1
+                 left join lease.lease_agreement t2
+                           on t1.id = t2.room_id
+                               and t2.status in (2, 5)
+                               and t2.is_deleted = 0
+                 left join lease.apartment_info t3
+                           on t1.apartment_id = t3.id
+                           and t3.is_deleted = 0
+        <where>
+            t1.is_deleted = 0
+            <if test="queryVo.provinceId != null and queryVo.provinceId != ''">
+                and t3.province_id = #{queryVo.provinceId}
+            </if>
+            <if test="queryVo.cityId != null and queryVo.cityId != ''">
+                and t3.city_id = #{queryVo.cityId}
+            </if>
+            <if test="queryVo.districtId != null and queryVo.districtId != ''">
+                and t3.district_id = #{queryVo.districtId}
+            </if>
+            <if test="queryVo.apartmentId != null and queryVo.apartmentId != ''">
+                and t3.id = #{queryVo.apartmentId}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -1,7 +1,11 @@
 package org.asuka.lease.web.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.asuka.lease.model.entity.RoomInfo;
+import org.asuka.lease.web.admin.vo.room.RoomItemVo;
+import org.asuka.lease.web.admin.vo.room.RoomQueryVo;
 
 /**
 * @author liubo
@@ -11,6 +15,7 @@ import org.asuka.lease.model.entity.RoomInfo;
 */
 public interface RoomInfoMapper extends BaseMapper<RoomInfo> {
 
+    IPage<RoomItemVo> getRoomItemVoList(Page<RoomItemVo> page, RoomQueryVo queryVo);
 }
 
 

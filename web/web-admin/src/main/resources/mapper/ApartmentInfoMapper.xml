@@ -4,4 +4,74 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.asuka.lease.web.admin.mapper.ApartmentInfoMapper">
 
+    <!--    IPage<ApartmentItemVo> selectApartmentItemVoWithPageAndQueryVo(Page<ApartmentItemVo> page, ApartmentQueryVo queryVo);-->
+    <select id="selectApartmentItemVoWithPageAndQueryVo"
+            resultType="org.asuka.lease.web.admin.vo.apartment.ApartmentItemVo">
+        with apartment as (
+            select id,
+                name,
+                introduction,
+                district_id,
+                district_name,
+                city_id,
+                city_name,
+                province_id,
+                province_name,
+                address_detail,
+                latitude,
+                longitude,
+                phone,
+                is_release
+            from lease.apartment_info
+            <where>
+                is_deleted = 0
+                <if test="queryVo.provinceId != '' and queryVo.provinceId != null">
+                    and province_id = #{queryVo.provinceId}
+                </if>
+                <if test="queryVo.cityId != '' and queryVo.cityId != null">
+                    and city_id = #{queryVo.cityId}
+                </if>
+                <if test="queryVo.districtId != '' and queryVo.districtId != null">
+                    and district_id = #{queryVo.districtId}
+                </if>
+            </where>
+            ),
+        room as (
+            select apartment_id,
+                count(*) as all_rooms
+            from lease.room_info
+            where is_deleted = 0
+            group by apartment_id
+            ),
+        lease as (
+            select apartment_id,
+                count(*) as lease_rooms
+            from lease.lease_agreement
+            where is_deleted = 0
+            and status in (2, 5)
+            group by apartment_id
+            )
+        select t1.id,
+            t1.name,
+            t1.introduction,
+            t1.district_id,
+            t1.district_name,
+            t1.city_id,
+            t1.city_name,
+            t1.province_id,
+            t1.province_name,
+            t1.address_detail,
+            t1.latitude,
+            t1.longitude,
+            t1.phone,
+            t1.is_release,
+            ifnull(t2.all_rooms, 0) as total_room_count,
+            ifnull(t2.all_rooms, 0) - ifnull(t3.lease_rooms, 0) as free_room_count
+        from apartment t1
+        left join room t2
+        on t1.id = t2.apartment_id
+        left join lease t3
+        on t1.id = t3.apartment_id
+    </select>
+
 </mapper>

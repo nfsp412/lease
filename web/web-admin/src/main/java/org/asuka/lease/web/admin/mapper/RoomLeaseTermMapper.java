@@ -1,7 +1,10 @@
 package org.asuka.lease.web.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.asuka.lease.model.entity.LeaseTerm;
 import org.asuka.lease.model.entity.RoomLeaseTerm;
+
+import java.util.List;
 
 /**
 * @author liubo
@@ -11,6 +14,7 @@ import org.asuka.lease.model.entity.RoomLeaseTerm;
 */
 public interface RoomLeaseTermMapper extends BaseMapper<RoomLeaseTerm> {
 
+    List<LeaseTerm> getLeaseTermList(Long id);
 }
 
 
