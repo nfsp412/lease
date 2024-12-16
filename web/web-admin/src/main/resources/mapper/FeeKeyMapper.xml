@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.asuka.lease.web.admin.mapper.FeeKeyMapper">
+
+    <resultMap id="feeKeyVoMap" type="org.asuka.lease.web.admin.vo.fee.FeeKeyVo">
+        <id property="id" column="key_id"/>
+        <result property="name" column="key_name"/>
+        <collection property="feeValueList" ofType="org.asuka.lease.model.entity.FeeValue">
+            <id property="id" column="value_id"/>
+            <result property="name" column="value_name"/>
+            <result property="unit" column="value_unit"/>
+            <result property="feeKeyId" column="fee_type_id"/>
+        </collection>
+    </resultMap>
+<!--    List<FeeKeyVo> getFeeKeyVoList();-->
+    <select id="getFeeKeyVoList" resultMap="feeKeyVoMap">
+        select
+            t1.id as key_id,
+            t1.name as key_name,
+            t2.id as value_id,
+            t2.name as value_name,
+            t2.unit as value_unit,
+            t2.fee_key_id as fee_key_id
+        from lease.fee_key t1
+        left join lease.fee_value t2
+        on t1.id = t2.fee_key_id
+        and t2.is_deleted = 0
+        where t1.is_deleted = 0
+    </select>
+</mapper>
