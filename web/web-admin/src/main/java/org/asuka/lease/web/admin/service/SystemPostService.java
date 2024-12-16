@@ -10,4 +10,5 @@ import org.asuka.lease.model.entity.SystemPost;
 */
 public interface SystemPostService extends IService<SystemPost> {
 
+    void deleteSystemPostById(Long id);
 }

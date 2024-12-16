@@ -4,8 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.asuka.lease.web.admin.mapper.SystemUserMapper">
 
-<!--    IPage<SystemUserItemVo> getSystemUserItemVoPage(Page<SystemUserItemVo> page, SystemUserQueryVo queryVo);-->
-    <select id="getSystemUserItemVoPage" resultType="org.asuka.lease.web.admin.vo.system.user.SystemUserItemVo">
+    <sql id="sql1">
         select t1.id,
                t1.username,
                t1.password,
@@ -21,6 +20,10 @@
                  left join lease.system_post t2
                            on t1.post_id = t2.id
                                and t2.is_deleted = 0
+    </sql>
+<!--    IPage<SystemUserItemVo> getSystemUserItemVoPage(Page<SystemUserItemVo> page, SystemUserQueryVo queryVo);-->
+    <select id="getSystemUserItemVoPage" resultType="org.asuka.lease.web.admin.vo.system.user.SystemUserItemVo">
+        <include refid="sql1"/>
         <where>
             t1.is_deleted = 0
             <if test="queryVo.name != null and queryVo.name != '' ">
@@ -30,5 +33,21 @@
                 and t1.phone like concat('%', #{queryVo.phone}, '%')
             </if>
         </where>
+    </select>
+
+<!--    SystemUserItemVo getSystemUserItemVoById(Long id);-->
+    <select id="getSystemUserItemVoById" resultType="org.asuka.lease.web.admin.vo.system.user.SystemUserItemVo">
+        <include refid="sql1"/>
+        where t1.is_deleted = 0
+            and t1.id = #{id}
+    </select>
+
+<!--    SystemUserInfoVo getSystemUserInfoVoById(Long userId);-->
+    <select id="getSystemUserInfoVoById" resultType="org.asuka.lease.web.admin.vo.system.user.SystemUserInfoVo">
+        select name,
+               avatar_url
+        from lease.system_user
+        where is_deleted = 0
+          and id = #{userId}
     </select>
 </mapper>

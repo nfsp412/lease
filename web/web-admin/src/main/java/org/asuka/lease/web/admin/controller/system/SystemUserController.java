@@ -4,6 +4,8 @@ package org.asuka.lease.web.admin.controller.system;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.minio.Digest;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.asuka.lease.common.result.Result;
 import org.asuka.lease.model.entity.SystemUser;
 import org.asuka.lease.model.enums.BaseStatus;
@@ -31,20 +33,25 @@ public class SystemUserController {
     public Result<IPage<SystemUserItemVo>> page(@RequestParam long current,
                                                 @RequestParam long size,
                                                 SystemUserQueryVo queryVo) {
-        Page<SystemUserItemVo> page = new Page<>(current,size);
-        IPage<SystemUserItemVo> systemUserItemVoIPage = systemUserService.getSystemUserItemVoPage(page,queryVo);
+        Page<SystemUserItemVo> page = new Page<>(current, size);
+        IPage<SystemUserItemVo> systemUserItemVoIPage = systemUserService.getSystemUserItemVoPage(page, queryVo);
         return Result.ok(systemUserItemVoIPage);
     }
 
     @Operation(summary = "根据ID查询后台用户信息")
     @GetMapping("getById")
     public Result<SystemUserItemVo> getById(@RequestParam Long id) {
-        return Result.ok();
+        SystemUserItemVo systemUserItemVo = systemUserService.getSystemUserItemVoById(id);
+        return Result.ok(systemUserItemVo);
     }
 
     @Operation(summary = "保存或更新后台用户信息")
     @PostMapping("saveOrUpdate")
     public Result saveOrUpdate(@RequestBody SystemUser systemUser) {
+        //密码加密处理
+        if (systemUser.getPassword() != null) {
+            systemUser.setPassword(DigestUtils.md5Hex(systemUser.getPassword()));
+        }
         systemUserService.saveOrUpdate(systemUser);
         return Result.ok();
     }
@@ -53,11 +60,11 @@ public class SystemUserController {
     @GetMapping("isUserNameAvailable")
     public Result<Boolean> isUsernameExists(@RequestParam String username) {
         LambdaQueryWrapper<SystemUser> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(SystemUser::getUsername,username);
+        wrapper.eq(SystemUser::getUsername, username);
         List<SystemUser> list = systemUserService.list(wrapper);
-        if (list.isEmpty()){
+        if (list.isEmpty()) {
             return Result.ok(true);
-        }else
+        } else
             return Result.ok(false);
     }
 
@@ -73,8 +80,8 @@ public class SystemUserController {
     public Result updateStatusByUserId(@RequestParam Long id,
                                        @RequestParam BaseStatus status) {
         LambdaUpdateWrapper<SystemUser> wrapper = new LambdaUpdateWrapper<>();
-        wrapper.eq(SystemUser::getId,id);
-        wrapper.set(SystemUser::getStatus,status);
+        wrapper.eq(SystemUser::getId, id);
+        wrapper.set(SystemUser::getStatus, status);
         systemUserService.update(wrapper);
         return Result.ok();
     }

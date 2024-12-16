@@ -11,6 +11,7 @@ import org.asuka.lease.model.enums.BaseStatus;
 import org.asuka.lease.web.admin.mapper.SystemUserMapper;
 import org.asuka.lease.web.admin.service.SystemUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.asuka.lease.web.admin.vo.system.user.SystemUserInfoVo;
 import org.asuka.lease.web.admin.vo.system.user.SystemUserItemVo;
 import org.asuka.lease.web.admin.vo.system.user.SystemUserQueryVo;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,17 @@ public class SystemUserServiceImpl extends ServiceImpl<SystemUserMapper, SystemU
         }
         //安全删除
         systemUserMapper.deleteById(id);
+    }
+
+    @Override
+    public SystemUserItemVo getSystemUserItemVoById(Long id) {
+        return systemUserMapper.getSystemUserItemVoById(id);
+
+    }
+
+    @Override
+    public SystemUserInfoVo getSystemUserInfoVoById(Long userId) {
+        return systemUserMapper.getSystemUserInfoVoById(userId);
     }
 }
 

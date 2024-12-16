@@ -1,8 +1,13 @@
 package org.asuka.lease.web.admin.controller.login;
 
 
+import io.jsonwebtoken.Claims;
+import org.asuka.lease.common.login.LoginUser;
+import org.asuka.lease.common.login.LoginUserHolder;
 import org.asuka.lease.common.result.Result;
+import org.asuka.lease.common.utils.JwtUtil;
 import org.asuka.lease.web.admin.service.LoginService;
+import org.asuka.lease.web.admin.service.SystemUserService;
 import org.asuka.lease.web.admin.vo.login.CaptchaVo;
 import org.asuka.lease.web.admin.vo.login.LoginVo;
 import org.asuka.lease.web.admin.vo.system.user.SystemUserInfoVo;
@@ -18,6 +23,9 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private SystemUserService systemUserService;
 
     @Operation(summary = "获取图形验证码")
     @GetMapping("login/captcha")
@@ -40,7 +48,12 @@ public class LoginController {
 
     @Operation(summary = "获取登陆用户个人信息")
     @GetMapping("info")
-    public Result<SystemUserInfoVo> info() {
-        return Result.ok();
+    public Result<SystemUserInfoVo> info(/*@RequestHeader("access-token") String token*/) {
+//        Claims claims = JwtUtil.parseToken(token);
+//        Long userId = claims.get("userId", Long.class);
+        LoginUser loginUser = LoginUserHolder.getLoginUser();
+        Long userId = loginUser.getUserId();
+        SystemUserInfoVo systemUserInfoVo = systemUserService.getSystemUserInfoVoById(userId);
+        return Result.ok(systemUserInfoVo);
     }
 }
